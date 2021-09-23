@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
   return (
-    <div className="container center-align">
+    <div className="container center-align" style={{marginRight:'7rem'}}>
       <div className="row">
-        <div className="col s12 m6">
-          <div className="card" style={{ margin: "auto" }}>
+        <div className="col m8"  style={{marginLeft:'4.5rem'}}>
+          <div className="card">
             <span className="card-title">Expense Management</span>
             <div className="divider"></div>
             <div className="card-content white-text">
@@ -15,7 +15,7 @@ const RegisterScreen = () => {
               </span>
               <div className="row">
                 <form className="col s12">
-                  <div className="">
+                  <div>
                     <div className="input-field col s6">
                       <input id="name" type="text" className="validate" />
                       <label htmlFor="name">Name</label>
@@ -25,7 +25,7 @@ const RegisterScreen = () => {
                       <label htmlFor="email">Email</label>
                     </div>
                   </div>
-                  <div className="">
+                  <div>
                     <div className="input-field col s12">
                       <input
                         id="password"

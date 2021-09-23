@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const LoginScreen = () => {
   return (
-    <div className="container center-align">
-      <div className="row">
-        <div className="col s12 m6">
-          <div className="card">
+    <div className="container center-align" style={{marginRight:'7rem'}}>
+      <div className="row" >
+        <div className="col m8" style={{marginLeft:'4.5rem'}}>
+          <div className="card"  >
             <span className="card-title">Expense Management</span>
             <div className="divider"></div>
             <div className="card-content white-text">
