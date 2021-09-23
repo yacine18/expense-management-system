@@ -1,0 +1,21 @@
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+  background-color: rgb(246, 246, 246);
+}
+
+
+
+.row {
+  margin-top: 3.5rem;
+}
+
+.divider{
+  position:absolute;
+  left:50%;
+  top:10%;
+  bottom:10%;
+  border-left:1px solid rgb(131, 32, 32);
+}
