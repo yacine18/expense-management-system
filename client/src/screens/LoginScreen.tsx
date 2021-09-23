@@ -13,7 +13,7 @@ const LoginScreen = () => {
               <span className="card-title row" style={{ color: "#757575" }}>
                 Sign In
               </span>
-              <div>
+              <div className="row">
                 <form className="col s12">
                   <div className="">
                     <div className="input-field col s12">
