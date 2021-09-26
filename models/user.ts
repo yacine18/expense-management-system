@@ -1,17 +1,15 @@
 "use strict";
 import { Model } from "sequelize";
 
-interface TransactionAttributes {
+interface UserAttributes {
   id: string;
-  label: string;
-  amount: number;
+  name: string;
+  email: string;
+  password: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Transaction
-    extends Model<TransactionAttributes>
-    implements TransactionAttributes
-  {
+  class User extends Model<UserAttributes> implements UserAttributes {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -19,14 +17,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
 
     id!: string;
-    label!: string;
-    amount!: number;
+    name!: string;
+    email!: string;
+    password!: string;
 
     static associate(models: any) {
-      // define association here
+      User.belongsToMany(models.Transaction, {
+        through: "Transaction",
+      });
     }
   }
-  Transaction.init(
+  User.init(
     {
       id: {
         type: DataTypes.UUID,
@@ -34,19 +35,24 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         primaryKey: true,
       },
-      label: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      amount: {
-        type: DataTypes.INTEGER,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Transaction",
+      modelName: "User",
     }
   );
-  return Transaction;
+  return User;
 };
