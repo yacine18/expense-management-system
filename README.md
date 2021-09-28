@@ -11,13 +11,11 @@ To run the frontend you will need to
 ``
  cd client
 ``
-and then run 
+and then
 ``
  npm install
-``
-and then run
-``
-npm start
+ npm start
+
 ``
 
 frontend listening on http://localhost:3000
