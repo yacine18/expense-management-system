@@ -14,7 +14,6 @@ To run the frontend you will need to
 and then
 ``
  npm install
- npm start
 ``
 and 
 ``
