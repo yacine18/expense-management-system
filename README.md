@@ -4,9 +4,13 @@
 Expense Management is a web application was built by using Nodejs/Express, React.js, Sequelize, and MySQL, this is an expense tracker allows to users to track/manage their expenses
 
 # Set Up Project
-
+To run the frontend you will to 
 ``
- cd client && npm install
+ cd client
+``
+and then run 
+``
+ npm install
 ``
 
 # Screen Shots
