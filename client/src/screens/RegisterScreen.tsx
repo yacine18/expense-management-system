@@ -7,8 +7,7 @@ const RegisterScreen = () => {
       <div className="row">
         <div className="col m8"  style={{marginLeft:'4.5rem'}}>
           <div className="card">
-            <span className="card-title">Expense Management</span>
-            <div className="divider"></div>
+            <span className="card-title row" style={{marginTop:'1rem'}}>Expense Management</span>
             <div className="card-content white-text">
               <span className="card-title row" style={{ color: "#757575" }}>
                 Sign Up

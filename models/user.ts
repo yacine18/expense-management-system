@@ -22,9 +22,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password!: string;
 
     static associate(models: any) {
-      User.belongsToMany(models.Transaction,{
-        through: "Transaction"
-      })
+      User.hasMany(models.Transaction)
     }
   }
   User.init(
