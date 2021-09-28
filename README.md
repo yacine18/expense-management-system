@@ -15,7 +15,10 @@ and then
 ``
  npm install
  npm start
-
+``
+and 
+``
+ npm start
 ``
 
 frontend listening on http://localhost:3000
