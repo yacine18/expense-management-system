@@ -16,8 +16,7 @@ transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
 
     const createdTransaction = await db.Transaction.create({
       label,
-      amount,
-      userId
+      amount
     });
 
     res.status(200).json({

@@ -6,16 +6,31 @@ body {
   background-color: rgb(246, 246, 246);
 }
 
-
-
 .row {
   margin-top: 3.5rem;
 }
 
-.divider{
-  position:absolute;
-  left:50%;
-  top:10%;
-  bottom:10%;
-  border-left:1px solid rgb(131, 32, 32);
+
+.success {
+  color: #20a020;
+}
+.danger {
+  color: #a02020;
+}
+.alert {
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+.alert-danger {
+  color: #a02020;
+  background-color: #ffe0e0;
+}
+.alert-success {
+  color: #20a020;
+  background-color: #eeffe0;
 }

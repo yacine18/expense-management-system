@@ -3,10 +3,10 @@ import bcrypt from "bcrypt";
 import db from "../models";
 import jwt from "jsonwebtoken";
 import { generateToken, isAuth } from "../utils";
-import sgMail from '@sendgrid/mail'
+import sgMail from "@sendgrid/mail";
 
-const sendGridApiKey:any = process.env.SENDGRID_API_KEY
-sgMail.setApiKey(sendGridApiKey)
+const sendGridApiKey: any = process.env.SENDGRID_API_KEY;
+sgMail.setApiKey(sendGridApiKey);
 
 const userRouter = Router();
 
@@ -104,22 +104,6 @@ userRouter.put("/:id", isAuth, async (req: Request, res: Response) => {
   }
 });
 
-//get user info
-userRouter.get("/:id", isAuth, async (req: Request, res: Response) => {
-  const id = req.params.id;
-  try {
-    const user = await db.User.findOne({
-      where: {
-        id,
-      },
-    });
-
-    res.status(200).json({ user });
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 //forget password route
 userRouter.post("/forget-password", async (req: Request, res: Response) => {
   const { email } = req.body;
@@ -142,18 +126,20 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
         expiresIn: "24h",
       }
     );
-    
+
     // email msg object
     const msg = {
       to: user.email, // Change to your recipient
-      from: 'hilali.yacin@gmail.com', // Change to your verified sender
-      subject: 'Reset Password',
+      from: "hilali.yacin@gmail.com", // Change to your verified sender
+      subject: "Reset Password",
       // text: 'and easy to do anywhere, even with Node.js',
-      html: `<p>Please click the link to reset your password: http://localhost:3000/reset-password/${user.id}/${token}</p>`,
-    }
+      html: `<p>Please click the link to reset your password: http://localhost:3000/reset-password/${user.id}/${token}</p>
+      <p>This email valid for 24h</p>
+      `,
+    };
 
     //sending email
-    await sgMail.send(msg)
+    await sgMail.send(msg);
 
     console.log(`http://localhost:8081/reset-password/${user.id}/${token}`);
     res.status(200).json({ message: "Email sent" });
@@ -168,9 +154,10 @@ userRouter.post(
   async (req: Request, res: Response) => {
     const { id, token } = req.params;
     const { password } = req.body;
-    const user = await db.User.findOne({ id });
-    const hashedPassword = bcrypt.hashSync(password, 8);
+
     try {
+      const user = await db.User.findOne({ id });
+      const hashedPassword = bcrypt.hashSync(password, 8);
       if (!user) {
         res.status(400).json({ message: "User does not exists" });
         return;
@@ -188,7 +175,7 @@ userRouter.post(
         }
       );
 
-      res.status(200).json({message: "Password updated successfully"})
+      res.status(200).json({ message: "Password updated successfully" });
     } catch (error) {}
   }
 );

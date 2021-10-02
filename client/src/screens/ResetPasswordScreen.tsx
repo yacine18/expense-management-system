@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgetPassword } from "../actions/userActions";
+import { resetPassword } from "../actions/userActions";
 import AlertMessage from "../components/AlertMessage";
 import { RootState } from "../store";
 
-const ForgetPasswordScreen = () => {
-  const [email, setEmail] = useState<string>("");
+const ResetPasswordScreen = (props: any) => {
+  const { id, token } = props.match.params;
+  // const token = props.match.params.token
 
-  const passwordForget = useSelector(
-    (state: RootState) => state.passwordForget
-  );
-  const { error }: any = passwordForget;
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const passwordReset = useSelector((state: RootState) => state.resetPassword);
+  const { error }: any = passwordReset;
+
+  console.log(id, token);
 
   const dispatch = useDispatch();
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    dispatch(forgetPassword(email));
+
+    if (password !== confirmPassword) {
+      return alert("Passwords Do Not Match");
+    } else {
+      dispatch(resetPassword(password,id));
+      // alert('Password Updated successfully!')
+    }
   };
 
   return (
@@ -29,10 +39,7 @@ const ForgetPasswordScreen = () => {
               <span className="card-title row" style={{ color: "#757575" }}>
                 Reset Password
               </span>
-              <div
-                className="row"
-                style={{ marginLeft: "0.5rem", width: "97%" }}
-              >
+              <div className="row">
                 {error && <AlertMessage variant="danger">{error}</AlertMessage>}
               </div>
               <div className="row">
@@ -40,13 +47,27 @@ const ForgetPasswordScreen = () => {
                   <div>
                     <div className="input-field col s12">
                       <input
-                        id="email"
-                        type="email"
+                        id="password"
+                        type="password"
                         className="validate"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="password">New Password</label>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="input-field col s12">
+                      <input
+                        id="confirm_password"
+                        type="password"
+                        className="validate"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                      <label htmlFor="confirm_password">
+                        Confirm New Password
+                      </label>
                     </div>
                   </div>
                   <div></div>
@@ -56,7 +77,7 @@ const ForgetPasswordScreen = () => {
                       className="waves-effect waves-light btn btn-block"
                       style={{ width: "95%" }}
                     >
-                      Reset Password
+                      Update Password
                     </button>
                   </div>
                 </form>
@@ -69,4 +90,4 @@ const ForgetPasswordScreen = () => {
   );
 };
 
-export default ForgetPasswordScreen;
+export default ResetPasswordScreen;

@@ -6,6 +6,9 @@ import LoginScreen from "./screens/LoginScreen";
 import Dashboard from "./screens/Dashboard";
 import ProfileScreen from "./screens/ProfileScreen";
 import ForgetPasswordScreen from "./screens/ForgetPasswordScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import AddTransaction from "./components/AddTransaction";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -14,9 +17,11 @@ function App() {
         <BrowserRouter>
           <Route path="/" exact component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/profile" component={ProfileScreen} />
-          <Route path="/reset-password" component={ForgetPasswordScreen} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/:id/profile" component={ProfileScreen} />
+          <PrivateRoute path="/add" component={AddTransaction} />
+          <Route path="/forget-password" component={ForgetPasswordScreen} />
+          <Route path="/reset-password/:id/:token" component={ResetPasswordScreen} />
         </BrowserRouter>
       </div>
     </>
