@@ -1,6 +1,8 @@
 import React from "react";
 
-const TransactionList = ({transaction}:any) => {
+const TransactionList = (props:any) => {
+  const {transaction} = props
+  console.log(props)
   return (
     <>
       <div className="row">

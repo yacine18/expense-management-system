@@ -1,13 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userDetails } from "../actions/userActions";
 import AlertMessage from "../components/AlertMessage";
 import Navbar from "../components/Navbar";
 import { RootState } from "../store";
 
-const ProfileScreen = () => {
+const ProfileScreen = (props:any) => {
+  const {id} = props.match.params
+  const detailsUser = useSelector((state: RootState) => state.detailsUser);
+  const { error, user }: any = detailsUser;
 
-  const userSignin = useSelector((state: RootState) => state.userSignin);
-  const { error, userInfo }: any = userSignin;
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(userDetails(id))
+  }, [dispatch, id])
 
   return (
     <div>
@@ -27,24 +34,17 @@ const ProfileScreen = () => {
         <div className="col s12 m6">
           <div className="card">
             <div className="card-content black-text">
-              <span className="card-title center">
-                Profile Details{" "}
-                <i
-                  className="material-icons"
-                  style={{ marginLeft: "0.2rem", cursor: "pointer" }}
-                >
-                  create
-                </i>
-              </span>
+              <span className="card-title center">Profile Details </span>
               <div className="row" style={{ marginLeft: "1.2rem" }}>
-                <strong style={{ marginLeft: "1.7rem" }}>
-                  {userInfo.name}
-                </strong>
+                <div className="row" style={{ marginLeft: "1.2rem" }}>
+                  <strong>Name</strong>
+                  <span style={{ marginLeft: "1.7rem" }}>{user?.name}</span>
+                </div>
               </div>
               <div className="row" style={{ marginLeft: "1.2rem" }}>
                 <div className="row" style={{ marginLeft: "1.2rem" }}>
                   <strong>Email</strong>
-                  <span style={{ marginLeft: "1.7rem" }}>{userInfo.email}</span>
+                  <span style={{ marginLeft: "1.7rem" }}>{user?.email}</span>
                 </div>
               </div>
             </div>

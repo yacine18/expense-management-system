@@ -104,6 +104,23 @@ userRouter.put("/:id", isAuth, async (req: Request, res: Response) => {
   }
 });
 
+//get user data
+userRouter.get('/:id', isAuth, async(req:Request, res:Response) => {
+  const {id} = req.params
+  const user = await db.User.findOne({
+    where:{
+      id
+    }
+  })
+
+  if(!user) {
+    res.status(404).json({ message: "User not found!" });
+    return
+  }
+
+  res.status(200).json(user);
+})
+
 //forget password route
 userRouter.post("/forget-password", async (req: Request, res: Response) => {
   const { email } = req.body;

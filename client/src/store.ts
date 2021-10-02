@@ -2,7 +2,7 @@ import { DefaultRootState } from 'react-redux';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import thunk from 'redux-thunk'
 import { createTransactionReducer, getTransactionReducer } from './reducers/transactionReducers';
-import { passwordForgetReducer, resetPasswordReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { detailsUserReducer, passwordForgetReducer, resetPasswordReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
 declare global {
     interface Window {
@@ -26,6 +26,7 @@ const reducer = combineReducers({
   transactionsList:getTransactionReducer,
   passwordForget: passwordForgetReducer,
   resetPassword: resetPasswordReducer,
+  detailsUser: detailsUserReducer,
 })
 
 

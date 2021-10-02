@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   FORGET_PASSWORD,
   FORGET_PASSWORD_ERROR,
+  GET_USER,
+  GET_USER_ERROR,
   REGISTER_USER,
   REGISTER_USER_ERROR,
   RESET_PASSWORD,
@@ -58,6 +60,32 @@ export const login = (email: any, password: any) => async (dispatch: any) => {
     });
   }
 };
+
+export const userDetails = (id:any) => async(dispatch:any, getState:any) => {
+  const {userSignin:{userInfo}} = getState()
+  try {
+
+    const {data} = await axios.get(`http://localhost:8081/api/users/${id}`,{
+      headers:{
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    })
+
+    dispatch({
+      type: GET_USER,
+      payload: data
+    });
+    
+  } catch (error:any) {
+    dispatch({
+      type: GET_USER_ERROR,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
 
 export const forgetPassword = (email: any) => async (dispatch: any) => {
   try {

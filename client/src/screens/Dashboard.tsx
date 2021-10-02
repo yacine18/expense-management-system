@@ -10,10 +10,12 @@ import TransactionList from "../components/TransactionList";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const transactionsList:any = useSelector(
+  const transactionsList: any = useSelector(
     (state: RootState) => state.transactionsList
   );
   const { error, transactions }: any = transactionsList;
+
+  console.log(transactions?.length);
 
   const dispatch = useDispatch();
 
@@ -31,22 +33,17 @@ const Dashboard = () => {
         <div className="card-panel">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <strong className=" black-text" style={{ fontSize: "1.1rem" }}>
-              <span style={{ fontSize: "1.1rem" }}>
-                {transactions && transactions.length > 0
-                  ? transactions && transactions.length
-                  : null}
-              </span>
+              <span style={{ fontSize: "1.1rem" }}>{transactions?.length}</span>
               {"  "}Transactions
             </strong>
             <Link to="/add" className="btn">
               New Transaction
             </Link>
           </div>
-          {transactions && transactions.length > 0 ? (
-            transactions.map((transaction: any) => (
+          {transactions?.length > 0 ? (
+            transactions?.map((transaction: any) => (
               <>
                 <TransactionList transaction={transaction} />
-                
               </>
             ))
           ) : (

@@ -8,6 +8,8 @@ import {
   FORGET_PASSWORD_ERROR,
   RESET_PASSWORD,
   RESET_PASSWORD_ERROR,
+  GET_USER,
+  GET_USER_ERROR,
 } from "../constants/userConstant";
 
 export const userRegisterReducer = (state = {}, action: any) => {
@@ -51,6 +53,25 @@ export const userSigninReducer = (state = {}, action: any) => {
   }
 };
 
+export const detailsUserReducer = (state = {}, action: any) => {
+  switch (action.type) {
+    case GET_USER:
+      return {
+        loading: false,
+        user: action.payload,
+      };
+
+    case GET_USER_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const passwordForgetReducer = (state = {}, action: any) => {
   switch (action.type) {
     case FORGET_PASSWORD:
@@ -69,7 +90,7 @@ export const passwordForgetReducer = (state = {}, action: any) => {
   }
 };
 
-export const resetPasswordReducer = (state = {}, action:any) => {
+export const resetPasswordReducer = (state = {}, action: any) => {
   switch (action.type) {
     case RESET_PASSWORD:
       return {
@@ -85,4 +106,4 @@ export const resetPasswordReducer = (state = {}, action:any) => {
     default:
       return state;
   }
-}
+};
