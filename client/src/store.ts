@@ -1,7 +1,7 @@
 import { DefaultRootState } from 'react-redux';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import thunk from 'redux-thunk'
-import { createTransactionReducer, getTransactionReducer } from './reducers/transactionReducers';
+import { createTransactionReducer, transactionsListReducer } from './reducers/transactionReducers';
 import { detailsUserReducer, passwordForgetReducer, resetPasswordReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
 declare global {
@@ -23,7 +23,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userSignin: userSigninReducer,
   createTransaction: createTransactionReducer,
-  transactionsList:getTransactionReducer,
+  transactionsList:transactionsListReducer,
   passwordForget: passwordForgetReducer,
   resetPassword: resetPasswordReducer,
   detailsUser: detailsUserReducer,

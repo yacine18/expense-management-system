@@ -1,27 +1,29 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../store";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const IncomesExpenses = () => {
-  // const transactionsList = useSelector(
-  //   (state: RootState) => state.transactionsList
-  // );
-  // const { transactions }: any = transactionsList;
+  const transactionsList = useSelector(
+    (state: RootState) => state.transactionsList
+  );
+  const { transactions }: any = transactionsList;
 
-  // const amounts:any[] =
-  //   transactions && transactions.length > 0
-  //     ? transactions.map((transaction: any) => transaction.amount)
-  //     : null;
+  const amounts: any =
+    transactions && transactions.length > 0
+      ? transactions?.map((transaction: any) => transaction.amount)
+      : null;
 
-  // const income = (
-  //   amounts.filter((item:any) => item > 0).reduce((acc:any, item:any) => (acc += item), 0) *
-  //   1
-  // ).toFixed(2);
+  const income = (
+    amounts
+      ?.filter((amount: any) => amount > 0)
+      .reduce((acc: any, amount: any) => (acc += amount), 0) * 1
+  ).toFixed(2);
 
-  // const expense = (
-  //   amounts.filter((item:any) => item < 0).reduce((acc:any, item:any) => (acc += item), 0) *
-  //   1
-  // ).toFixed(2);
+  const expense = (
+    amounts
+      ?.filter((amount: any) => amount < 0)
+      .reduce((acc: any, amount: any) => (acc += amount), 0) * -1
+  ).toFixed(2);
 
   return (
     <div
@@ -36,14 +38,14 @@ const IncomesExpenses = () => {
         <strong>Incomes</strong>
       </div>
       <div className="green-text">
-        <span>$200</span>
+        <span>+${income}</span>
       </div>
       <div className="divider green-text"></div>
       <div className="red-text">
         <strong>Expenses</strong>
       </div>
       <div className="red-text">
-        <span>$100</span>
+        <span>-${expense}</span>
       </div>
     </div>
   );

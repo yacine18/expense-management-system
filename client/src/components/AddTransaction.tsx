@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addTransaction } from "../actions/transactionActions";
 import { RootState } from "../store";
 import AlertMessage from "./AlertMessage";
@@ -13,11 +14,9 @@ const AddTransaction = (props: any) => {
     (state: RootState) => state.createTransaction
   );
 
-  const { error, transaction }: any = createTransaction;
+  const { error }: any = createTransaction;
 
   const dispatch = useDispatch();
-
-  console.log(transaction);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -84,6 +83,15 @@ const AddTransaction = (props: any) => {
                         Submit
                       </button>
                     </div>
+                    <div>
+                    <Link
+                      to="/dashboard"
+                      className="btn-flat"
+                      style={{ width: "95%" }}
+                    >
+                     Cancel
+                    </Link>
+                  </div>
                   </form>
                 </div>
               </div>

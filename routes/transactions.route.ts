@@ -30,12 +30,9 @@ transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
 
 // get all transactions from DB
 transactionRouter.get("/", isAuth, async (req: Request, res: Response) => {
-  const UserId = req.user.id
   try {
-    const transactions = await db.Transaction.findAll({subQuery:false},{UserId});
-    res.status(200).json({
-      transactions,
-    });
+    const transactions = await db.Transaction.findAll();
+    res.status(200).json(transactions);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

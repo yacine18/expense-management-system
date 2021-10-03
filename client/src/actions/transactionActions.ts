@@ -36,23 +36,23 @@ export const addTransaction =
     }
   };
 
-export const getTransactions = () => async (dispatch: any, getState: any) => {
-  
+export const listTransactions = () => async (dispatch: any, getState: any) => {
   const {
     userSignin: { userInfo },
   } = getState();
 
   try {
-    const { data } = await axios.get("http://localhost:8081/api/transactions", {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const {data} = await axios.get('/api/transactions', {
+      headers:{
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    })
+
     dispatch({
       type: GET_TRANSACTION,
-      payload: data,
-    });
-  } catch (error: any) {
+      payload:data
+    })
+  } catch (error:any) {
     dispatch({
       type: GET_TRANSACTION_ERROR,
       payload:

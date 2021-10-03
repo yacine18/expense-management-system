@@ -10,7 +10,6 @@ export const createTransactionReducer = (state = {}, action: any) => {
     case ADD_TRANSACTION:
       return {
         loading: false,
-        transaction: action.payload,
       };
 
     case ADD_TRANSACTION_ERROR:
@@ -24,24 +23,21 @@ export const createTransactionReducer = (state = {}, action: any) => {
   }
 };
 
-export const getTransactionReducer = (
-  state = {},
-  action: any
-) => {
+export const transactionsListReducer = (state = {}, action:any) => {
   switch (action.type) {
     case GET_TRANSACTION:
-      return {
-        loading: false,
-        transactions: action.payload,
+      return{
+        loading:false,
+        transactions: action.payload
       };
 
-    case GET_TRANSACTION_ERROR:
-      return {
-        loading: false,
-        error: action.payload,
+      case GET_TRANSACTION_ERROR:
+      return{
+        loading:false,
+        error: action.payload
       };
-
+  
     default:
       return state;
   }
-};
+}

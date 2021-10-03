@@ -28,6 +28,7 @@ export const register =
         type: REGISTER_USER,
         payload: data,
       });
+      localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error: any) {
       dispatch({
         type: REGISTER_USER_ERROR,

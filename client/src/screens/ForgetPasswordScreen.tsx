@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { forgetPassword } from "../actions/userActions";
 import AlertMessage from "../components/AlertMessage";
 import { RootState } from "../store";
@@ -25,7 +26,7 @@ const ForgetPasswordScreen = () => {
         <div className="col m8" style={{ marginLeft: "5rem" }}>
           <div className="card">
             <div className="divider"></div>
-            <div className="card-content white-text">
+            <div className="card-content">
               <span className="card-title row" style={{ color: "#757575" }}>
                 Reset Password
               </span>
@@ -58,6 +59,15 @@ const ForgetPasswordScreen = () => {
                     >
                       Reset Password
                     </button>
+                  </div>
+                  <div>
+                    <Link
+                      to="/login"
+                      className="btn-flat"
+                      style={{ width: "95%" }}
+                    >
+                     Cancel
+                    </Link>
                   </div>
                 </form>
               </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { resetPassword } from "../actions/userActions";
 import AlertMessage from "../components/AlertMessage";
 import { RootState } from "../store";
@@ -79,6 +80,15 @@ const ResetPasswordScreen = (props: any) => {
                     >
                       Update Password
                     </button>
+                  </div>
+                  <div>
+                    <Link
+                      to="/login"
+                      className="btn-flat"
+                      style={{ width: "95%" }}
+                    >
+                     Cancel
+                    </Link>
                   </div>
                 </form>
               </div>

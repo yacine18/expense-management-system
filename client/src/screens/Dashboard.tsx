@@ -4,52 +4,65 @@ import IncomesExpenses from "../components/IncomesExpenses";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useEffect } from "react";
-import { getTransactions } from "../actions/transactionActions";
+import { listTransactions } from "../actions/transactionActions";
 import AlertMessage from "../components/AlertMessage";
-import TransactionList from "../components/TransactionList";
 import { Link } from "react-router-dom";
+import TransactionList from "../components/TransactionList";
 
 const Dashboard = () => {
-  const transactionsList: any = useSelector(
-    (state: RootState) => state.transactionsList
-  );
-  const { error, transactions }: any = transactionsList;
 
-  console.log(transactions?.length);
+const transactionsList = useSelector((state:RootState) => state.transactionsList)
+const {error, transactions}:any = transactionsList
 
-  const dispatch = useDispatch();
+const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getTransactions());
-  }, [dispatch]);
+useEffect(() => {
+  dispatch(listTransactions())
+}, [dispatch])
 
   return (
     <div>
       <Navbar />
       <div className="row container">
         {error && <AlertMessage variant="danger">{error}</AlertMessage>}
-        <Balance />
-        <IncomesExpenses />
-        <div className="card-panel">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <strong className=" black-text" style={{ fontSize: "1.1rem" }}>
-              <span style={{ fontSize: "1.1rem" }}>{transactions?.length}</span>
-              {"  "}Transactions
-            </strong>
-            <Link to="/add" className="btn">
-              New Transaction
-            </Link>
+        <>
+          <Balance />
+          <IncomesExpenses />
+          <div className="card-panel">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <strong className=" black-text" style={{ fontSize: "1.1rem" }}>
+                <span style={{ fontSize: "1.1rem" }}>
+                  {transactions?.length}
+                </span>
+                {"  "}Transactions
+              </strong>
+              <Link to="/add" className="btn">
+                New Transaction
+              </Link>
+            </div>
+            {transactions?.length ? (
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Label</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {transactions?.map((transaction: any) => (
+                    <TransactionList key={transaction.id} transaction={transaction} />
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="row">
+                <p className="center-align">No Transactions Found.</p>
+              </div>
+            )}
           </div>
-          {transactions?.length > 0 ? (
-            transactions?.map((transaction: any) => (
-              <>
-                <TransactionList transaction={transaction} />
-              </>
-            ))
-          ) : (
-            <p style={{ textAlign: "center" }}>No Transactions Found.</p>
-          )}
-        </div>
+        </>
       </div>
     </div>
   );

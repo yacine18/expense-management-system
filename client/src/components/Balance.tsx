@@ -15,11 +15,11 @@ const Balance = () => {
 
   const amounts: any =
     transactions && transactions.length > 0
-      ? transactions.map((transaction: any) => transaction.amount)
+      ? transactions?.map((transaction: any) => transaction.amount)
       : null;
   const total =
     transactions && transactions.length > 0
-      ? amounts.reduce((acc: any, item: any) => (acc += item), 0)
+      ? amounts?.reduce((acc: any, item: any) => (acc += item), 0)
       : 0;
 
   const dispatch = useDispatch();
