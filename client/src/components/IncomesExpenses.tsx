@@ -9,9 +9,7 @@ const IncomesExpenses = () => {
   const { transactions }: any = transactionsList;
 
   const amounts: any =
-    transactions && transactions.length > 0
-      ? transactions?.map((transaction: any) => transaction.amount)
-      : null;
+    transactions?.map((transaction: any) => transaction.amount)
 
   const income = (
     amounts

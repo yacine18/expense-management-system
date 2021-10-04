@@ -112,10 +112,10 @@ export const signout = () => (dispatch: any) => {
 };
 
 export const resetPassword =
-  (password: string,id:any) => async (dispatch: any) => {
+  (password: string,id:string, token:string) => async (dispatch: any) => {
     try {
       const { data } = await axios.post(
-        `/api/users/reset-password/${id}`,
+        `/api/users/reset-password/${id}/${token}`,
         password
       );
       dispatch({

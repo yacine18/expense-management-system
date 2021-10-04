@@ -7,15 +7,12 @@ import { RootState } from "../store";
 
 const ResetPasswordScreen = (props: any) => {
   const { id, token } = props.match.params;
-  // const token = props.match.params.token
 
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const passwordReset = useSelector((state: RootState) => state.resetPassword);
   const { error }: any = passwordReset;
-
-  console.log(id, token);
 
   const dispatch = useDispatch();
 
@@ -25,8 +22,9 @@ const ResetPasswordScreen = (props: any) => {
     if (password !== confirmPassword) {
       return alert("Passwords Do Not Match");
     } else {
-      dispatch(resetPassword(password,id));
-      // alert('Password Updated successfully!')
+      dispatch(resetPassword(password,id, token));
+      // redirect user to login page
+      // props.history.push('/login')
     }
   };
 

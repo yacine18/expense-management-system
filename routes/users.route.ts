@@ -140,7 +140,7 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
       },
       jwtSecret,
       {
-        expiresIn: "24h",
+        expiresIn: "1d",
       }
     );
 

@@ -32,7 +32,7 @@ useEffect(() => {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <strong className=" black-text" style={{ fontSize: "1.1rem" }}>
                 <span style={{ fontSize: "1.1rem" }}>
-                  {transactions?.length}
+                  {transactions?.length > 0 ? transactions?.length : ''}
                 </span>
                 {"  "}Transactions
               </strong>

@@ -16,7 +16,8 @@ transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
 
     const createdTransaction = await db.Transaction.create({
       label,
-      amount
+      amount,
+      userId
     });
 
     res.status(200).json({
@@ -31,46 +32,8 @@ transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
 // get all transactions from DB
 transactionRouter.get("/", isAuth, async (req: Request, res: Response) => {
   try {
-    const transactions = await db.Transaction.findAll();
+    const transactions = await db.Transaction.findAll({id:req.user.id});
     res.status(200).json(transactions);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-//update transation
-transactionRouter.put("/:id", isAuth, async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const {label, amount} = req.body
-  try {
-    const updatedTransaction = await db.Transaction.update({label, amount}, {
-      where:{
-        id
-      }
-    });
-
-    res.status(200).json({
-      message: "Transaction updated successfully",
-      updatedTransaction,
-    });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-//delete transation
-transactionRouter.delete("/:id", isAuth, async (req: Request, res: Response) => {
-  const id = req.params.id;
-  try {
-    await db.Transaction.destroy({
-      where:{
-        id
-      }
-    });
-
-    res.status(200).json({
-      message: "Transaction deleted successfully",
-    });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
