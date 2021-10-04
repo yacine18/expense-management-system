@@ -35,10 +35,9 @@ backend listening on http://localhost:8081
 
 ## Screen Shots
 
+![dasboard](https://user-images.githubusercontent.com/44382346/135916822-c6314f4a-5eaa-4a27-83f9-3c8c6e454c21.png)
 
-![image](https://user-images.githubusercontent.com/44382346/134557296-9f6677bd-ed7a-4661-a3dd-9567ba3c6434.png)
-
-![image](https://user-images.githubusercontent.com/44382346/134589405-a8ad1764-8f7e-4c39-96d1-10b43e227798.png)
+![register](https://user-images.githubusercontent.com/44382346/135916646-53ce3ae1-c3c4-4701-9297-48d9f103a234.png)
 
 ![login](https://user-images.githubusercontent.com/44382346/135916316-16b00668-cbfb-4b39-bf2a-c4620f0675a2.png)
 
