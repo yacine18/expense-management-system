@@ -23,7 +23,7 @@ useEffect(() => {
   return (
     <div>
       <Navbar />
-      <div className="row container">
+      <div className="row container" style={{maxWidth:'100%', minWidth:'450px'}}>
         {error && <AlertMessage variant="danger">{error}</AlertMessage>}
         <>
           <Balance />

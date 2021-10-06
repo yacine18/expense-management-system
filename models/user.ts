@@ -6,6 +6,7 @@ interface UserAttributes {
   name: string;
   email: string;
   password: string;
+  resetToken?:string
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -20,11 +21,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     name!: string;
     email!: string;
     password!: string;
+    resetToken?:string
 
     static associate(models: any) {
-      // User.belongsToMany(models.Transaction,{
-      //   through: "Transaction"
-      // })
+      User.hasMany(models.Transaction, {foreignKey:'userId',as:"transactions"})
+
     }
   }
   User.init(
@@ -48,6 +49,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      resetToken:{
+        type:DataTypes.STRING
+      }
     },
     {
       sequelize,

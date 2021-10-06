@@ -28,7 +28,7 @@ export const register =
         type: REGISTER_USER,
         payload: data,
       });
-      localStorage.setItem('userInfo', JSON.stringify(data))
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error: any) {
       dispatch({
         type: REGISTER_USER_ERROR,
@@ -62,31 +62,35 @@ export const login = (email: any, password: any) => async (dispatch: any) => {
   }
 };
 
-export const userDetails = (id:any) => async(dispatch:any, getState:any) => {
-  const {userSignin:{userInfo}} = getState()
-  try {
+export const userDetails =
+  (id: any) => async (dispatch: any, getState: any) => {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8081/api/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
 
-    const {data} = await axios.get(`http://localhost:8081/api/users/${id}`,{
-      headers:{
-        Authorization: `Bearer ${userInfo.token}`
-      }
-    })
-
-    dispatch({
-      type: GET_USER,
-      payload: data
-    });
-    
-  } catch (error:any) {
-    dispatch({
-      type: GET_USER_ERROR,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-}
+      dispatch({
+        type: GET_USER,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: GET_USER_ERROR,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const forgetPassword = (email: any) => async (dispatch: any) => {
   try {
@@ -111,24 +115,20 @@ export const signout = () => (dispatch: any) => {
   dispatch({ type: USER_SIGNOUT });
 };
 
-export const resetPassword =
-  (password: string,id:string, token:string) => async (dispatch: any) => {
-    try {
-      const { data } = await axios.post(
-        `/api/users/reset-password/${id}/${token}`,
-        password
-      );
-      dispatch({
-        type: RESET_PASSWORD,
-        payload: data,
-      });
-    } catch (error: any) {
-      dispatch({
-        type: RESET_PASSWORD_ERROR,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+export const passwordReset = (password: string) => async (dispatch: any) => {
+  try {
+    const { data } = await axios.post("/api/users/reset-password", password);
+    dispatch({
+      type: RESET_PASSWORD,
+      payload: data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: RESET_PASSWORD_ERROR,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

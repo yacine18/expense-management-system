@@ -11,7 +11,7 @@ const ForgetPasswordScreen = () => {
   const passwordForget = useSelector(
     (state: RootState) => state.passwordForget
   );
-  const { error }: any = passwordForget;
+  const { error, success }: any = passwordForget;
 
   const dispatch = useDispatch();
 
@@ -35,6 +35,7 @@ const ForgetPasswordScreen = () => {
                 style={{ marginLeft: "0.5rem", width: "97%" }}
               >
                 {error && <AlertMessage variant="danger">{error}</AlertMessage>}
+                {success && <AlertMessage variant="success">Email Sent. Please check your inbox</AlertMessage>}
               </div>
               <div className="row">
                 <form className="col s12" onSubmit={submitHandler}>

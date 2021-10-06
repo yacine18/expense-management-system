@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { resetPassword } from "../actions/userActions";
+import { passwordReset } from "../actions/userActions";
 import AlertMessage from "../components/AlertMessage";
 import { RootState } from "../store";
 
-const ResetPasswordScreen = (props: any) => {
-  const { id, token } = props.match.params;
+const ResetPasswordScreen = () => {
 
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const passwordReset = useSelector((state: RootState) => state.resetPassword);
-  const { error }: any = passwordReset;
+  const resetPassword = useSelector((state: RootState) => state.resetPassword);
+  const { error }: any = resetPassword;
 
   const dispatch = useDispatch();
 
@@ -20,9 +19,9 @@ const ResetPasswordScreen = (props: any) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return alert("Passwords Do Not Match");
+      return alert("Passwords do not match");
     } else {
-      dispatch(resetPassword(password,id, token));
+      dispatch(passwordReset(password));
       // redirect user to login page
       // props.history.push('/login')
     }

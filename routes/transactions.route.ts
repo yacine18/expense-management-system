@@ -1,13 +1,13 @@
 import { Request, Response, Router } from "express";
 import db from "../models/index";
-import {isAuth} from '../utils'
+import { isAuth } from "../utils";
 
 const transactionRouter = Router();
 
 // create new transaction
 transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
   const { label, amount } = req.body;
-  const userId = req.user.id
+  const userId = req.user.id;
   try {
     if (!label || !amount) {
       res.status(400).json({ message: "Fields should not be empty" });
@@ -31,13 +31,16 @@ transactionRouter.post("/", isAuth, async (req: Request, res: Response) => {
 
 // get all transactions from DB
 transactionRouter.get("/", isAuth, async (req: Request, res: Response) => {
+  const userId = req.user.id
+  console.log(userId)
   try {
-    const transactions = await db.Transaction.findAll({id:req.user.id});
+    const transactions = await db.Transaction.findAll({where:{
+      userId
+    }});
     res.status(200).json(transactions);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 export default transactionRouter;

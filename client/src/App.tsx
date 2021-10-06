@@ -21,7 +21,7 @@ function App() {
           <PrivateRoute path="/:id/profile" component={ProfileScreen} />
           <PrivateRoute path="/add" component={AddTransaction} />
           <Route path="/forget-password" component={ForgetPasswordScreen} />
-          <Route path="/reset-password/:id/:token" component={ResetPasswordScreen} />
+          <Route path="/reset-password/:id" component={ResetPasswordScreen} />
         </BrowserRouter>
       </div>
     </>
