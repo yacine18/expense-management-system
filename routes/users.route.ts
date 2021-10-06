@@ -126,15 +126,14 @@ userRouter.get("/:id", isAuth, async (req: Request, res: Response) => {
 userRouter.post("/forget-password", async (req: Request, res: Response) => {
   const { email } = req.body;
  
-  const user = await db.User.findOne({ email });
-
   try {
+    const user = await db.User.findOne({ email });
     if (user.email !== email) {
       res.status(400).json({ message: "User does not exists" });
       return;
     }
 
-    const jwtSecret: any = process.env.JWT_SECRET;
+    const jwtSecret: any = process.env.JWT_RESET_PASSWORD_SECRET;
     const token = jwt.sign(
       {
         email: user.email,
@@ -157,11 +156,11 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
       `,
     };
 
-    // await db.User.update({resetToken:token}, {
-    //   where:{
-    //     email
-    //   }
-    // })
+    await db.User.update({resetToken:token}, {
+      where:{
+        email
+      }
+    })
 
     //sending email
     await sgMail.send(msg);
@@ -183,7 +182,7 @@ userRouter.post("/reset-password", async (req: Request, res: Response) => {
       res.status(400).json({ message: "User does not exists" });
       return;
     }
-    const jwtSecret: any = process.env.JWT_SECRET;
+    const jwtSecret: any = process.env.JWT_RESET_PASSWORD_SECRET;
     jwt.verify(user.resetToken, jwtSecret);
     res.status(200).json({ message: "Reset Email for " + user.email });
     await db.User.update(
