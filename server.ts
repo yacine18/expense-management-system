@@ -18,7 +18,7 @@ app.use(cors());
 app.use("/api/users", userRouter);
 app.use("/api/transactions", transactionRouter);
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || '8081';
 db.sequelize.sync().then(() => {
     app.listen(port, () => {
         console.log(`App listening on port ${port}`)
