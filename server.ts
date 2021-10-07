@@ -1,8 +1,8 @@
-if (process.env.NODE_ENV === "production") {
-    require("dotenv").config();
-  }
+import dotenv from 'dotenv'
+dotenv.config()
 import express from "express";
 import cors from "cors";
+import path from 'path'
 import db from "./models";
 
 //importing routes
@@ -18,6 +18,9 @@ app.use(cors());
 //routes
 app.use("/api/users", userRouter);
 app.use("/api/transactions", transactionRouter);
+
+app.use(express.static(path.join(__dirname, '/client/build')))
+app.get('*', (req,res)=> res.sendFile(path.join(__dirname, '/client/build/index.html')))
 
 const port = process.env.PORT || 8081;
 db.sequelize.sync().then(() => {

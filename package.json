@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "start": "ts-node server.ts",
     "dev": "nodemon --exec ts-node server.ts"
   },

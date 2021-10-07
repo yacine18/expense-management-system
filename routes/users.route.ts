@@ -2,11 +2,10 @@ import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
 import db from "../models";
 import jwt from "jsonwebtoken";
-import crypto from 'crypto'
 import { generateToken, isAuth } from "../utils";
 import sgMail from "@sendgrid/mail";
 
-const sendGridApiKey: any = process.env.SENDGRID_API_KEY;
+const sendGridApiKey: any = process.env.SENDGRID_API_KEY || "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";
 sgMail.setApiKey(sendGridApiKey);
 
 const userRouter = Router();
