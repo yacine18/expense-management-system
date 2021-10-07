@@ -150,7 +150,7 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
       from: "hilali.yacin@gmail.com", // Change to your verified sender
       subject: "Reset Password",
       // text: 'and easy to do anywhere, even with Node.js',
-      html: `<p>Please click the link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}</p>
+      html: `<p>Please click the link to reset your password: https://expense-system-management.herokuapp.com/reset-password/${token}</p>
       <p>This email valid for 30 min</p>
       `,
     };
