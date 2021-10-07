@@ -22,9 +22,8 @@ app.use("/api/transactions", transactionRouter);
 app.use(express.static(path.join(__dirname, '/client/build')))
 app.get('*', (req,res)=> res.sendFile(path.join(__dirname, '/client/build/index.html')))
 
-const port = "8081";
 db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-        console.log(`App listening on port ${port}`)
+    app.listen("8081", () => {
+        console.log(`App listening on port 8081`)
     })
 })
