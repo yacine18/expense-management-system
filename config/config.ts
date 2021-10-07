@@ -2,10 +2,10 @@ require('dotenv').config()
 
 module.exports = {
   "development": {
-    "username": process.env.DB_USERNAME,
-    "password": process.env.DB_PASSWORD,
-    "database": process.env.DB_DATABASE,
-    "host": process.env.DB_HOST,
+    "username": "sql4442607",
+    "password": "IKlAMYLnPt",
+    "database": "sql4442607",
+    "host": "sql4.freesqldatabase.com",
     "dialect": "mysql"
   },
   "test": {
