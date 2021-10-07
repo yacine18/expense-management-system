@@ -25,6 +25,6 @@ app.get('*', (req,res)=> res.sendFile(path.join(__dirname, '/client/build/index.
 const PORT = "8081";
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
-        console.log(`App listening on port ${PORT}`)
+        console.log(`App listening on port 8081`)
     })
 })
