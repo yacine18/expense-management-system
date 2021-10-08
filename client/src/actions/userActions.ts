@@ -93,7 +93,7 @@ export const userDetails =
 
 export const forgetPassword = (email: any) => async (dispatch: any) => {
   try {
-    const { data } = await axios.post("/api/users/forget-password", { email });
+    const { data } = await axios.post("https://expense-system-management.herokuapp.com/api/users/forget-password", { email });
     dispatch({
       type: FORGET_PASSWORD,
       payload: data,
@@ -116,7 +116,7 @@ export const signout = () => (dispatch: any) => {
 
 export const passwordReset = (password: string) => async (dispatch: any) => {
   try {
-    const { data } = await axios.post("/api/users/reset-password", password);
+    const { data } = await axios.post("https://expense-system-management.herokuapp.com/api/users/reset-password", password);
     dispatch({
       type: RESET_PASSWORD,
       payload: data,

@@ -7,7 +7,7 @@ declare module "express" {
     }
   }
 export const generateToken = (user:any) => {
-    const jwtSecret:any = process.env.JWT_SECRET
+    const jwtSecret:any = process.env.JWT_SECRET || '@TRNHGsq14253@://!§§/.Klkfslh+098+7'
    return jwt.sign({
        id: user.id,
        email: user.email

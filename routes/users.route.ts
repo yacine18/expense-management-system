@@ -132,7 +132,7 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
       return;
     }
 
-    const jwtSecret: any = process.env.JWT_RESET_PASSWORD_SECRET;
+    const jwtSecret: any = process.env.JWT_RESET_PASSWORD_SECRET || '@TRNHGsq14253@://!§§/.Klkfslh+098+7lkjhlfghjlk@@@@@';
     const token = jwt.sign(
       {
         email: user.email,
