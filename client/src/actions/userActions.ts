@@ -17,7 +17,7 @@ export const register =
   (name: any, email: any, password: any) => async (dispatch: any) => {
     try {
       const { data } = await axios.post(
-        "https://expense-system-management/api/users/register",
+        "https://expense-system-management.herokuapp.com/api/users/register",
         {
           name,
           email,
@@ -41,7 +41,7 @@ export const register =
 
 export const login = (email: any, password: any) => async (dispatch: any) => {
   try {
-    const { data } = await axios.post("https://expense-system-management/api/users/login", {
+    const { data } = await axios.post("https://expense-system-management.herokuapp.com/api/users/login", {
       email,
       password,
     });
@@ -68,7 +68,7 @@ export const userDetails =
     } = getState();
     try {
       const { data } = await axios.get(
-        `https://expense-system-management/api/users/${id}`,
+        `https://expense-system-management.herokuapp.com/api/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,

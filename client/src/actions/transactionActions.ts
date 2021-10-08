@@ -13,7 +13,7 @@ export const addTransaction =
         userSignin: { userInfo },
       } = getState();
       const { data } = await axios.post(
-        "/api/transactions",
+        "https://expense-system-management.herokuapp.com/api/transactions",
         { label, amount },
         {
           headers: {
@@ -42,7 +42,7 @@ export const listTransactions = () => async (dispatch: any, getState: any) => {
   } = getState();
 
   try {
-    const {data} = await axios.get('/api/transactions', {
+    const {data} = await axios.get('https://expense-system-management.herokuapp.com/api/transactions', {
       headers:{
         Authorization: `Bearer ${userInfo.token}`
       }
