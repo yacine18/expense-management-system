@@ -21,7 +21,7 @@ export const isAuth = (req:Request, res:Response, next:NextFunction) => {
 
      if(authorization){
          const token = authorization.slice(7, authorization.length)
-         const jwtSecret:any = process.env.JWT_SECRET
+         const jwtSecret:any = process.env.JWT_SECRET || '@TRNHGsq14253@://!§§/.Klkfslh+098+7'
          
          jwt.verify(token, jwtSecret, (err:any, decode:any) => {
              if(err){
