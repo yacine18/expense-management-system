@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { generateToken, isAuth } from "../utils";
 import sgMail from "@sendgrid/mail";
 
-const sendGridApiKey: any = process.env.SENDGRID_API_KEY || "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";
+const sendGridApiKey: any = process.env.SENDGRID_API_KEY;
 sgMail.setApiKey(sendGridApiKey);
 
 const userRouter = Router();
@@ -63,8 +63,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      res.status(400).json({ message: "No Account with this email" });
-      return;
+     return res.status(400).json({ message: "No Account with this email" });
     }
 
     const isMatch = bcrypt.compareSync(password, user.password);
@@ -124,15 +123,14 @@ userRouter.get("/:id", isAuth, async (req: Request, res: Response) => {
 //forget password route
 userRouter.post("/forget-password", async (req: Request, res: Response) => {
   const { email } = req.body;
+  const user = await db.User.findOne({ email });
  
   try {
-    const user = await db.User.findOne({ email });
-    if (user.email !== email) {
-      res.status(400).json({ message: "User does not exists" });
-      return;
+    if (email !== user.email) {
+     return res.status(400).json({ message: "User does not exists" });
     }
 
-    const jwtSecret: any = process.env.JWT_RESET_PASSWORD_SECRET || '@TRNHGsq14253@://!§§/.Klkfslh+098+7lkjhlfghjlk@@@@@';
+    const jwtSecret: any = process.env.JWT_SECRET;
     const token = jwt.sign(
       {
         email: user.email,
@@ -154,12 +152,6 @@ userRouter.post("/forget-password", async (req: Request, res: Response) => {
       <p>This email valid for 30 min</p>
       `,
     };
-
-    await db.User.update({resetToken:token}, {
-      where:{
-        email
-      }
-    })
 
     //sending email
     await sgMail.send(msg);

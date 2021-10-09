@@ -91,9 +91,9 @@ export const userDetails =
     }
   };
 
-export const forgetPassword = (email: any) => async (dispatch: any) => {
+export const forgetPassword = (email: string) => async (dispatch: any) => {
   try {
-    const { data } = await axios.post("https://expense-system-management.herokuapp.com/api/users/forget-password", { email });
+    const { data } = await axios.post("https://expense-system-management.herokuapp.com/api/users/forget-password", email );
     dispatch({
       type: FORGET_PASSWORD,
       payload: data,
