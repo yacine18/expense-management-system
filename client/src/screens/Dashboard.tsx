@@ -44,7 +44,6 @@ useEffect(() => {
               <table>
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Label</th>
                     <th>Amount</th>
                     <th>Date</th>
