@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { generateToken, isAuth } from "../utils";
 import sgMail from "@sendgrid/mail";
 
-const sendGridApiKey: any = process.env.SENDGRID_API_KEY;
+const sendGridApiKey: any = process.env.SENDGRID_API_KEY || "5è-(jhqskjqfldkf";
 sgMail.setApiKey(sendGridApiKey);
 
 const userRouter = Router();
