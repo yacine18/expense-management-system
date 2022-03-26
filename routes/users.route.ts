@@ -77,7 +77,9 @@ userRouter.post("/login", async (req: Request, res: Response) => {
     } else {
       res.status(400).json({ message: "Invalid Email or Password" });
     }
-  } catch (error) {}
+  } catch (error:any) {
+    console.log(error.message)
+  }
 });
 
 //update profile details
